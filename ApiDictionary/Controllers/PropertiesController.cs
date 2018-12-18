@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApiDictionary.Services.PropertyService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,6 +12,12 @@ namespace ApiDictionary.Controllers
     [ApiController]
     public class PropertiesController : ControllerBase
     {
+        private IPropertyService propertyService;
+
+        public PropertiesController(IPropertyService propertyService)
+        {
+            this.propertyService = propertyService;
+        }
         // GET: api/Properties
         [HttpGet]
         public IEnumerable<string> Get()
@@ -29,7 +36,7 @@ namespace ApiDictionary.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
-
+            propertyService.
         }
 
         // PUT: api/Properties/5

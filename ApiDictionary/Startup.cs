@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApiDictionary.Model.DataAccess.PropertyDao;
+using ApiDictionary.Model.Services.DictionaryService;
 using ApiDictionary.Services.PropertyService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,7 +29,9 @@ namespace ApiDictionary
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddTransient<IPropertyService, PropertyServiceMock>();
+            services.AddTransient<IPropertyService, PropertyServiceProxy>();
+            services.AddTransient<IDictionaryService, DictionaryService>();
+            services.AddTransient<IPropertyDao, PropertyDaoMongo>();
             //services.AddTransient<>
         }
 

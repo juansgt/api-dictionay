@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs/ApiDictionary/v15
+/ApiDictionary/bin/Debug/netcoreapp2.1
+/ApiDictionary/obj/Debug/netcoreapp2.1
+/ApiDictionary.Model/bin/Debug/netcoreapp2.1
+/DataAccess/bin/Debug/netcoreapp2.1
+/DataAccess/obj/Debug/netcoreapp2.1
+/ApiDictionary.Model/obj/Debug/netcoreapp2.1

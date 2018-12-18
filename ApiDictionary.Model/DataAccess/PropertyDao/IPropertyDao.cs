@@ -1,11 +1,12 @@
-﻿using System;
+﻿using ApiDictionary.Model.DataAccess.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ApiDictionary.Model.DataAccess.PropertyDao
 {
-    internal interface IPropertyDao
+    public interface IPropertyDao
     {
-         Property Create 
+        Property CreateProperty(Property property);
     }
 }
