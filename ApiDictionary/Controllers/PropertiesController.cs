@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApiDictionary.Models;
 using ApiDictionary.Services.PropertyService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,16 +28,22 @@ namespace ApiDictionary.Controllers
 
         // GET: api/Properties/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public PropertyModel Get(string id)
         {
-            return "value";
+            return propertyService.Find(id);
         }
 
         // POST: api/Properties
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post(PropertyModel propertyModel)
         {
-            propertyService.
+            //PropertyModel propertyModel = new PropertyModel();
+
+            //propertyModel.Name = "codigoDeCuenta";
+            //propertyModel.PropertyType = "string";
+            //propertyModel.Examples = new List<string>(new string[] { "ES9121000418450200051333", "ES6621000418401234567894" });
+
+            propertyService.CreateProperty(propertyModel);
         }
 
         // PUT: api/Properties/5

@@ -15,9 +15,14 @@ namespace ApiDictionary.Model.Services.DictionaryService
             this.propertyDao = propertyDao;
         }
 
+        public Property Find(string id)
+        {
+            return propertyDao.Find(id);
+        }
+
         public Property CreateProperty(Property property)
         {
-            throw new NotImplementedException();
+            return propertyDao.CreateProperty(property);
         }
     }
 }

@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiDictionary", "ApiDictionary\ApiDictionary.csproj", "{913E195E-9525-4AA8-88B8-8D3F8DF4EC5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiDictionary.Model", "ApiDictionary.Model\ApiDictionary.Model.csproj", "{995078E1-68B4-42C6-AE98-D0F296434A50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiDictionary.Model", "ApiDictionary.Model\ApiDictionary.Model.csproj", "{995078E1-68B4-42C6-AE98-D0F296434A50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiDictionary.Test", "ApiDictionary.Test\ApiDictionary.Test.csproj", "{A22DC39D-1F47-472F-A357-D3575B3385EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{995078E1-68B4-42C6-AE98-D0F296434A50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{995078E1-68B4-42C6-AE98-D0F296434A50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{995078E1-68B4-42C6-AE98-D0F296434A50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A22DC39D-1F47-472F-A357-D3575B3385EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A22DC39D-1F47-472F-A357-D3575B3385EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A22DC39D-1F47-472F-A357-D3575B3385EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A22DC39D-1F47-472F-A357-D3575B3385EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,3 +9,6 @@
 /DataAccess/bin/Debug/netcoreapp2.1
 /DataAccess/obj/Debug/netcoreapp2.1
 /ApiDictionary.Model/obj/Debug/netcoreapp2.1
+/ApiDictionary.Test/bin/Debug/netcoreapp2.1
+/ApiDictionary.Test/obj/Debug/netcoreapp2.1
+/ApiDictionary.Test/obj

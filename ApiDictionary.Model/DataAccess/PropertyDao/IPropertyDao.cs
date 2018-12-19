@@ -7,6 +7,7 @@ namespace ApiDictionary.Model.DataAccess.PropertyDao
 {
     public interface IPropertyDao
     {
+        Property Find(string id);
         Property CreateProperty(Property property);
     }
 }

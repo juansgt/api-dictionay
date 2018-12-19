@@ -7,6 +7,7 @@ namespace ApiDictionary.Model.Services.DictionaryService
 {
     public interface IDictionaryService
     {
+        Property Find(string id);
         Property CreateProperty(Property property);
     }
 }

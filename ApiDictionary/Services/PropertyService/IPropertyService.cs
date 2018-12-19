@@ -8,6 +8,7 @@ namespace ApiDictionary.Services.PropertyService
 {
     public interface IPropertyService
     {
+        PropertyModel Find(string id);
         PropertyModel CreateProperty(PropertyModel propertyModel);
     }
 }

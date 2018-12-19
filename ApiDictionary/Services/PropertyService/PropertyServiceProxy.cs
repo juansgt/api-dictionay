@@ -18,11 +18,29 @@ namespace ApiDictionary.Services.PropertyService
             this.dictionaryService = dictionaryService;
         }
 
+        public PropertyModel Find(string id)
+        {
+            PropertyModel propertyModel = new PropertyModel();
+            Property property = dictionaryService.Find(id);
+
+            propertyModel.Id = property.Id;
+            propertyModel.Examples = property.Examples;
+            propertyModel.Name = property.Name;
+            propertyModel.PropertyType = property.PropertyType;
+
+            return propertyModel;
+        }
+
         public PropertyModel CreateProperty(PropertyModel propertyModel)
         {
             Property property = new Property();
-            property.Examples = propertyModel.
-            dictionaryService.CreateProperty()
+            property.Examples = propertyModel.Examples;
+            property.Name = propertyModel.Name;
+            property.PropertyType = propertyModel.PropertyType;
+
+            propertyModel.Id = dictionaryService.CreateProperty(property).Id;
+
+            return propertyModel;
         }
     }
 }

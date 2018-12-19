@@ -10,6 +10,22 @@ namespace ApiDictionary.Model.DataAccess.PropertyDao
 {
     public class PropertyDaoMongo : IPropertyDao
     {
+        public Property Find(string id)
+        {
+            var client = new MongoClient("mongodb://172.17.0.2:27017");
+            var database = client.GetDatabase("dictionary");
+            var collection = database.GetCollection<PropertyMongo>("properties");
+
+            PropertyMongo propertyMongo = collection.Find(p => p.Id.ToString() == id).FirstOrDefault();
+            Property property = new Property();
+
+            propertyMongo.Name = property.Name;
+            propertyMongo.PropertyType = property.PropertyType;
+            propertyMongo.Examples = property.Examples;
+
+            return property;
+        }
+
         public Property CreateProperty(Property property)
         {
             var client = new MongoClient("mongodb://172.17.0.2:27017");
@@ -23,10 +39,12 @@ namespace ApiDictionary.Model.DataAccess.PropertyDao
 
             collection.InsertOne(propertyMongo);
 
+            property.Id = propertyMongo.Id.ToString();
+
             return property;
         }
 
-        public class PropertyMongo
+        private class PropertyMongo
         {
             [BsonId]
             public ObjectId Id { get; set; }
