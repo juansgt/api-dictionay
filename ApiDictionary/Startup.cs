@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 namespace ApiDictionary
 {
@@ -31,7 +32,10 @@ namespace ApiDictionary
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<IPropertyService, PropertyServiceProxy>();
             services.AddTransient<IDictionaryService, DictionaryService>();
-            services.AddTransient<IPropertyDao, PropertyDaoMongo>();
+            var mongoClient = new MongoClient("mongodb://172.17.0.2:27017");
+            var mongoDatabase = mongoClient.GetDatabase("dictionary");
+            services.AddTransient<IPropertyDao>(s => new PropertyDaoMongo(mongoClient, mongoDatabase));
+            //services.AddTransient<IPropertyDao, PropertyDaoMongo>();
             //services.AddTransient<>
         }
 
