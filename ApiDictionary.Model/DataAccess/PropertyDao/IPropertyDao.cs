@@ -8,6 +8,7 @@ namespace ApiDictionary.Model.DataAccess.PropertyDao
     public interface IPropertyDao
     {
         Property Find(string id);
+        IEnumerable<Property> FindAllByName(string name);
         Property CreateProperty(Property property);
     }
 }

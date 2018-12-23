@@ -20,6 +20,11 @@ namespace ApiDictionary.Model.Services.DictionaryService
             return propertyDao.Find(id);
         }
 
+        public IEnumerable<Property> FindAllByName(string name)
+        {
+            return propertyDao.FindAllByName(name);
+        }
+
         public Property CreateProperty(Property property)
         {
             return propertyDao.CreateProperty(property);

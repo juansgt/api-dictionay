@@ -21,13 +21,13 @@ namespace ApiDictionary.Controllers
         }
         // GET: api/Properties
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<PropertyModel> GetAllPropertiesByName(string name)
         {
-            return new string[] { "value1", "value2" };
+            return propertyService.FindAllByName(name);
         }
 
         // GET: api/Properties/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public PropertyModel Get(string id)
         {
             return propertyService.Find(id);
@@ -37,12 +37,6 @@ namespace ApiDictionary.Controllers
         [HttpPost]
         public void Post(PropertyModel propertyModel)
         {
-            //PropertyModel propertyModel = new PropertyModel();
-
-            //propertyModel.Name = "codigoDeCuenta";
-            //propertyModel.PropertyType = "string";
-            //propertyModel.Examples = new List<string>(new string[] { "ES9121000418450200051333", "ES6621000418401234567894" });
-
             propertyService.CreateProperty(propertyModel);
         }
 

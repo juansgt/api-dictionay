@@ -8,6 +8,7 @@ namespace ApiDictionary.Model.Services.DictionaryService
     public interface IDictionaryService
     {
         Property Find(string id);
+        IEnumerable<Property> FindAllByName(string name);
         Property CreateProperty(Property property);
     }
 }

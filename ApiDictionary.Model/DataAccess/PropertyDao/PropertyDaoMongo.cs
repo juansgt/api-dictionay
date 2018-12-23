@@ -12,36 +12,51 @@ namespace ApiDictionary.Model.DataAccess.PropertyDao
     {
         private readonly MongoClient mongoClient;
         private readonly IMongoDatabase mongoDatabase;
+        private readonly IMongoCollection<PropertyMongo> propertiesCollection; 
 
         public PropertyDaoMongo(MongoClient mongoClient, IMongoDatabase mongoDatabase)
         {
             this.mongoClient = mongoClient;
             this.mongoDatabase = mongoDatabase;
-
+            this.propertiesCollection = mongoDatabase.GetCollection<PropertyMongo>("properties");
         }
 
         public Property Find(string id)
         {
-            var collection = mongoDatabase.GetCollection<PropertyMongo>("properties");
-
             ObjectId objectId = ObjectId.Parse(id);
-            PropertyMongo propertyMongo = collection.Find(p => p.Id == objectId).FirstOrDefault();
+            PropertyMongo propertyMongo = propertiesCollection.Find(p => p.Id == objectId).FirstOrDefault();
 
             return propertyMongo.ConvertToProperty();
         }
 
+        public IEnumerable<Property> FindAllByName(string name)
+        {
+            return this.ConvertAllToProperties(propertiesCollection.Find(p => p.Name == name).ToList());
+        }
+
         public Property CreateProperty(Property property)
         {
-            var collection = mongoDatabase.GetCollection<PropertyMongo>("properties");
             PropertyMongo propertyMongo = PropertyMongo.ConvertToPropertyMongo(property);
 
-            collection.InsertOne(propertyMongo);
+            propertiesCollection.InsertOne(propertyMongo);
             property.Id = propertyMongo.Id.ToString();
 
             return property;
         }
 
-        private class PropertyMongo
+        protected IEnumerable<Property> ConvertAllToProperties(IEnumerable<PropertyMongo> propertiesMongo)
+        {
+            List<Property> porperties = new List<Property>();
+
+            foreach (PropertyMongo propertieMongo in propertiesMongo)
+            {
+                porperties.Add(propertieMongo.ConvertToProperty());
+            }
+
+            return porperties;
+        }
+
+        protected class PropertyMongo
         {
             [BsonId]
             public ObjectId Id { get; set; }

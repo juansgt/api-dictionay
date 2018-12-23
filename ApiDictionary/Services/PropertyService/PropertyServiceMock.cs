@@ -17,5 +17,10 @@ namespace ApiDictionary.Services.PropertyService
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<PropertyModel> FindAllByName(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
