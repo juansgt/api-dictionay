@@ -20,7 +20,7 @@ namespace ApiDictionary.Model.Services.DictionaryService
             return propertyDao.Find(id);
         }
 
-        public IEnumerable<Property> FindAllByName(string name)
+        public IEnumerable<Property> FindAllByName(string name, int pageSize, int pageNumber)
         {
             return propertyDao.FindAllByName(name);
         }

@@ -29,9 +29,17 @@ namespace ApiDictionary.Model.DataAccess.PropertyDao
             return propertyMongo.ConvertToProperty();
         }
 
-        public IEnumerable<Property> FindAllByName(string name)
+        public IEnumerable<Property> FindAll()
         {
-            return this.ConvertAllToProperties(propertiesCollection.Find(p => p.Name == name).ToList());
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Property> FindAllByName(string name, int pageSize, int pageNumber)
+        {
+            return this.ConvertAllToProperties(propertiesCollection.Find(p => p.Name == name)
+                                                                   .Skip(this.calculatePageNumber(pageSize, pageNumber))
+                                                                   .Limit(pageSize)
+                                                                   .ToList());
         }
 
         public Property CreateProperty(Property property)
@@ -54,6 +62,11 @@ namespace ApiDictionary.Model.DataAccess.PropertyDao
             }
 
             return porperties;
+        }
+
+        protected int calculatePageNumber(int pageNumber, int pageSize)
+        {
+            return pageNumber > 0 ? ((pageNumber - 1) * pageSize) : 0;
         }
 
         protected class PropertyMongo
