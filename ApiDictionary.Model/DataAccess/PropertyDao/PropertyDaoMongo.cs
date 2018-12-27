@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using ApiDictionary.Model.DataAccess.Entities;
+using ApiDictionary.Model.DataAccess.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
@@ -34,12 +37,30 @@ namespace ApiDictionary.Model.DataAccess.PropertyDao
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Property> FindAllByName(SearchFilter searchFilter, Pagination pagination)
+        public IEnumerable<Property> FindAllByFilter(SearchFilter searchFilter, Pagination pagination)
         {
-            return this.ConvertAllToProperties(propertiesCollection.Find(p => p.Name == search)
-                                                                   .Skip(this.calculatePageNumber(pageSize, pageNumber))
-                                                                   .Limit(pageSize)
-                                                                   .ToList());
+            IFindFluent<PropertyMongo, PropertyMongo> query = null;
+
+            if (searchFilter.Name != null && searchFilter.PropertyType == null)
+            {
+                query = propertiesCollection.Find(p => p.Name == searchFilter.Name);
+            }
+            else if (searchFilter.Name == null && searchFilter.PropertyType != null)
+            {
+                query = propertiesCollection.Find(p => p.PropertyType == searchFilter.PropertyType);
+            }
+            else if (searchFilter.Name != null && searchFilter.PropertyType != null)
+            {
+                query = propertiesCollection.Find(p => p.Name == searchFilter.Name && p.PropertyType == searchFilter.PropertyType);
+            }
+            else if (searchFilter.Name == null && searchFilter.PropertyType == null)
+            {
+                query = propertiesCollection.Find(_ => true);
+            }
+
+            return this.ConvertAllToProperties(query.Skip(this.calculatePageNumber(pagination.PageSize, pagination.PageNumber))
+                                                    .Limit(pagination.PageSize)
+                                                    .ToList());
         }
 
         public Property CreateProperty(Property property)

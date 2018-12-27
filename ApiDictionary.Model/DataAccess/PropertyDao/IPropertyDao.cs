@@ -10,7 +10,7 @@ namespace ApiDictionary.Model.DataAccess.PropertyDao
     {
         Property Find(string id);
         IEnumerable<Property> FindAll();
-        IEnumerable<Property> FindAllByName(SearchFilter searchFilter, Pagination pagination);
+        IEnumerable<Property> FindAllByFilter(SearchFilter searchFilter, Pagination pagination);
         Property CreateProperty(Property property);
     }
 }
