@@ -34,9 +34,9 @@ namespace ApiDictionary.Model.DataAccess.PropertyDao
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Property> FindAllByName(string name, int pageSize, int pageNumber)
+        public IEnumerable<Property> FindAllByName(SearchFilter searchFilter, Pagination pagination)
         {
-            return this.ConvertAllToProperties(propertiesCollection.Find(p => p.Name == name)
+            return this.ConvertAllToProperties(propertiesCollection.Find(p => p.Name == search)
                                                                    .Skip(this.calculatePageNumber(pageSize, pageNumber))
                                                                    .Limit(pageSize)
                                                                    .ToList());

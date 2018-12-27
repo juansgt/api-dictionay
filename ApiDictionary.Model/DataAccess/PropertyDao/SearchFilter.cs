@@ -7,14 +7,12 @@ namespace ApiDictionary.Model.DataAccess.PropertyDao
     public class SearchFilter
     {
         public string Name { get; set; }
-        public int PageSize { get; set; }
-        public int PageNumber { get; set; }
+        public string PropertyType { get; set; }
 
-        public SearchFilter(string name, int pageSize, int pageNumber)
+        public SearchFilter(string name, string propertyType)
         {
             Name = name;
-            PageSize = pageSize;
-            PageNumber = pageNumber;
+            PropertyType = propertyType;
         }
     }
 }
