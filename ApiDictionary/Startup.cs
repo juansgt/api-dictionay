@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApiDictionary.Model.DataAccess.PropertyDao;
+using ApiDictionary.Model.DataAccess.PropertyDao.PropertyDaoMongo;
 using ApiDictionary.Model.Services.DictionaryService;
 using ApiDictionary.Services.PropertyService;
 using Microsoft.AspNetCore.Builder;
@@ -34,8 +35,8 @@ namespace ApiDictionary
             services.AddTransient<IDictionaryService, DictionaryService>();
             var mongoClient = new MongoClient("mongodb://172.17.0.2:27017");
             var mongoDatabase = mongoClient.GetDatabase("dictionary");
-            services.AddTransient<IPropertyDao>(s => new PropertyDaoMongo(mongoClient, mongoDatabase));
-            //services.AddTransient<IPropertyDao, PropertyDaoMongo>();
+            services.AddTransient<IPropertyDao>(s => new PropertyDaoMongoImpl(mongoClient, mongoDatabase));
+            //services.AddTransient<IPropertyDao, PropertyDaoMongoImpl>();
             //services.AddTransient<>
         }
 
