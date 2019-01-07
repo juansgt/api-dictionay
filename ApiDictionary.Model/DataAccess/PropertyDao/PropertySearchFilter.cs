@@ -11,8 +11,8 @@ namespace ApiDictionary.Model.DataAccess.PropertyDao
 
         public PropertySearchFilter(string name, string propertyType)
         {
-            Name = name;
-            PropertyType = propertyType;
+            Name = name == null ? string.Empty : name;
+            PropertyType = propertyType == null ? string.Empty : name;
         }
     }
 }

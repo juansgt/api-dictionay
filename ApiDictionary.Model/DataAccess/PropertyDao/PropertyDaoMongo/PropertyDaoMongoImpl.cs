@@ -4,6 +4,7 @@ using ApiDictionary.Model.DataAccess.Generic.Util;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -35,30 +36,12 @@ namespace ApiDictionary.Model.DataAccess.PropertyDao.PropertyDaoMongo
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Property> FindAllByFilter(PropertySearchFilter searchFilter, Pagination pagination)
+        public IEnumerable<Property> FindAllByName(string name, Pagination pagination)
         {
-            IFindFluent<PropertyMongo, PropertyMongo> query = null;
-
-            if (searchFilter.Name != null && searchFilter.PropertyType == null)
-            {
-                query = PropertiesCollection.Find(p => p.Name == searchFilter.Name);
-            }
-            else if (searchFilter.Name == null && searchFilter.PropertyType != null)
-            {
-                query = PropertiesCollection.Find(p => p.PropertyType == searchFilter.PropertyType);
-            }
-            else if (searchFilter.Name != null && searchFilter.PropertyType != null)
-            {
-                query = PropertiesCollection.Find(p => p.Name == searchFilter.Name && p.PropertyType == searchFilter.PropertyType);
-            }
-            else if (searchFilter.Name == null && searchFilter.PropertyType == null)
-            {
-                query = PropertiesCollection.Find(_ => true);
-            }
-
-            return this.ConvertAllToProperties(query.Skip(pagination.CalculatePageNumber())
-                                                    .Limit(pagination.PageSize)
-                                                    .ToList());
+            return this.ConvertAllToProperties(PropertiesCollection.Find(p => p.Name == name)
+                                                                   .Skip(pagination.CalculatePageNumber())
+                                                                   .Limit(pagination.PageSize)
+                                                                   .ToList());
         }
 
         public Property CreateProperty(Property property)

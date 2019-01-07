@@ -11,7 +11,7 @@ namespace ApiDictionary.Model.DataAccess.PropertyDao
     {
         Property Find(string id);
         IEnumerable<Property> FindAll();
-        IEnumerable<Property> FindAllByFilter(PropertySearchFilter searchFilter, Pagination pagination);
+        IEnumerable<Property> FindAllByName(string name, Pagination pagination);
         Property CreateProperty(Property property);
     }
 }
