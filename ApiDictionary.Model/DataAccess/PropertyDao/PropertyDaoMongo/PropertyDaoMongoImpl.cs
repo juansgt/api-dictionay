@@ -33,7 +33,7 @@ namespace ApiDictionary.Model.DataAccess.PropertyDao.PropertyDaoMongo
 
         public IEnumerable<Property> FindAll()
         {
-            throw new NotImplementedException();
+            return this.ConvertAllToProperties(PropertiesCollection.Find(_ => true).ToList());
         }
 
         public IEnumerable<Property> FindAllByName(string name, Pagination pagination)

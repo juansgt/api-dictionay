@@ -6,6 +6,7 @@ using ApiDictionary.Model.DataAccess.PropertyDao;
 using ApiDictionary.Model.DataAccess.PropertyDao.PropertyDaoMongo;
 using ApiDictionary.Model.Services.DictionaryService;
 using ApiDictionary.Services.PropertyService;
+using Criteria;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;

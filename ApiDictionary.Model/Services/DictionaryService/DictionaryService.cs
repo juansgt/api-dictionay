@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ApiDictionary.Model.DataAccess.Entities;
+using ApiDictionary.Model.DataAccess.Generic.Util;
 using ApiDictionary.Model.DataAccess.PropertyDao;
 
 namespace ApiDictionary.Model.Services.DictionaryService
@@ -20,9 +21,14 @@ namespace ApiDictionary.Model.Services.DictionaryService
             return propertyDao.Find(id);
         }
 
-        public IEnumerable<Property> FindAllByName(string name, int pageSize, int pageNumber)
+        public IEnumerable<Property> FindAll()
         {
-            return propertyDao.FindAllByName(name);
+            return propertyDao.FindAll();
+        }
+
+        public IEnumerable<Property> FindAllByName(string name, Pagination pagination)
+        {
+            return propertyDao.FindAllByName(name, pagination);
         }
 
         public Property CreateProperty(Property property)

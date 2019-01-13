@@ -22,5 +22,10 @@ namespace ApiDictionary.Services.PropertyService
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<PropertyModel> FindAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

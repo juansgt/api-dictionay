@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ApiDictionary.Model.DataAccess.Entities;
 using ApiDictionary.Model.Services.DictionaryService;
 using ApiDictionary.Models;
+using Criteria;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ApiDictionary.Services.PropertyService
@@ -23,9 +24,16 @@ namespace ApiDictionary.Services.PropertyService
             return this.ConvertToPropertyModel(dictionaryService.Find(id));
         }
 
+        public IEnumerable<PropertyModel> FindAll()
+        {
+            return this.ConvertAllToPropertyModel(dictionaryService.FindAll());
+        }
+
         public IEnumerable<PropertyModel> FindAllByName(string name)
         {
-            return this.ConvertAllToPropertyModel(dictionaryService.FindAllByName(name));
+            ICriteria<Property> criteria = new CriteriaFieldEqualsTo<Property>("Name", name, new ProviderImpl(dictionaryService));
+
+            return this.ConvertAllToPropertyModel(criteria.meetCriteria());
         }
 
         public PropertyModel CreateProperty(PropertyModel propertyModel)
@@ -68,6 +76,21 @@ namespace ApiDictionary.Services.PropertyService
             }
 
             return porperties;
+        }
+
+        public class ProviderImpl : IElementProvider<Property>
+        {
+            private readonly IDictionaryService dictionaryService;
+
+            public ProviderImpl(IDictionaryService dictionaryService)
+            {
+                this.dictionaryService = dictionaryService;
+            }
+
+            public IEnumerable<Property> GetElements()
+            {
+                return dictionaryService.FindAll();
+            }
         }
     }
 }

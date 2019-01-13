@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApiDictionary.Model\ApiDictionary.Model.csproj" />
+    <ProjectReference Include="..\Criteria\Criteria.csproj" />
   </ItemGroup>
 
 </Project>
