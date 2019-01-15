@@ -9,20 +9,17 @@ namespace Criteria
     {
         public string ValueToCompare { get; set; }
         public string FieldToCompare { get; set; }
-        private readonly IElementProvider<E> provider;
+        private readonly IEnumerable<E> items;
 
-        public CriteriaFieldEqualsTo(string fieldToCompare, string valueToCompare, IElementProvider<E> provider)
+        public CriteriaFieldEqualsTo(string fieldToCompare, string valueToCompare, IEnumerable<E> items)
         {
             ValueToCompare = valueToCompare;
             FieldToCompare = fieldToCompare;
-            this.provider = provider;
         }
 
         public IEnumerable<E> meetCriteria()
         {
-            IEnumerable<E> elements = provider.GetElements();
-
-            return elements.Where(element => element.GetType().GetProperty(FieldToCompare).GetValue(element).ToString() == ValueToCompare).ToList();
+            return items.Where(item => item.GetType().GetProperty(FieldToCompare).GetValue(item).ToString() == ValueToCompare).ToList();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Criteria
         private ICriteria<E> criteria;
         private ICriteria<E> otherCriteria;
 
-        public CriteriaOr(ICriteria<E> criteria, ICriteria<E> otherCriteria, IElementProvider<E> provider)
+        public CriteriaOr(ICriteria<E> criteria, ICriteria<E> otherCriteria)
         {
             this.criteria = criteria;
             this.otherCriteria = otherCriteria;

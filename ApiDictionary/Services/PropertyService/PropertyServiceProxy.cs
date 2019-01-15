@@ -31,7 +31,7 @@ namespace ApiDictionary.Services.PropertyService
 
         public IEnumerable<PropertyModel> FindAllByName(string name)
         {
-            ICriteria<Property> criteria = new CriteriaFieldEqualsTo<Property>("Name", name, new ProviderImpl(dictionaryService));
+            ICriteria<Property> criteria = new CriteriaFieldEqualsTo<Property>("Name", name, dictionaryService.FindAll());
 
             return this.ConvertAllToPropertyModel(criteria.meetCriteria());
         }
@@ -76,21 +76,6 @@ namespace ApiDictionary.Services.PropertyService
             }
 
             return porperties;
-        }
-
-        public class ProviderImpl : IElementProvider<Property>
-        {
-            private readonly IDictionaryService dictionaryService;
-
-            public ProviderImpl(IDictionaryService dictionaryService)
-            {
-                this.dictionaryService = dictionaryService;
-            }
-
-            public IEnumerable<Property> GetElements()
-            {
-                return dictionaryService.FindAll();
-            }
         }
     }
 }
