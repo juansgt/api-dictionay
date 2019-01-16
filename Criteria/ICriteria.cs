@@ -6,6 +6,6 @@ namespace Criteria
 {
     public interface ICriteria<E>
     {
-        IEnumerable<E> meetCriteria();
+        IEnumerable<E> MeetCriteria(IEnumerable<E> items);
     }
 }

@@ -9,7 +9,7 @@ namespace ApiDictionary.Services.PropertyService
     public interface IPropertyService
     {
         PropertyModel Find(string id);
-        IEnumerable<PropertyModel> FindAll();
+        IEnumerable<PropertyModel> FindAllFilter(string propertyName, string name, string deescription);
         IEnumerable<PropertyModel> FindAllByName(string name);
         PropertyModel CreateProperty(PropertyModel propertyModel);
     }

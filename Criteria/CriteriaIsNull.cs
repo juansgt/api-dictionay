@@ -5,21 +5,19 @@ using System.Text;
 
 namespace Criteria
 {
-    public class CriteriaFieldEqualsTo<E> : ICriteria<E>
+    public class CriteriaIsNull<E> : ICriteria<E>
     {
-        public string ValueToCompare { get; set; }
         public string FieldToCompare { get; set; }
         private readonly IEnumerable<E> items;
 
-        public CriteriaFieldEqualsTo(string fieldToCompare, string valueToCompare)
+        public CriteriaIsNull(string fieldToCompare)
         {
-            ValueToCompare = valueToCompare;
             FieldToCompare = fieldToCompare;
         }
 
         public IEnumerable<E> MeetCriteria(IEnumerable<E> items)
         {
-            return items.Where(item => item.GetType().GetProperty(FieldToCompare).GetValue(item).ToString() == ValueToCompare).ToList();
+            return items.Where(item => item.GetType().GetProperty(FieldToCompare).GetValue(item) == null).ToList();
         }
     }
 }

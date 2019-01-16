@@ -24,16 +24,23 @@ namespace ApiDictionary.Services.PropertyService
             return this.ConvertToPropertyModel(dictionaryService.Find(id));
         }
 
-        public IEnumerable<PropertyModel> FindAll()
+        public IEnumerable<PropertyModel> FindAllFilter(string propertyName, string name, string deescription)
         {
-            return this.ConvertAllToPropertyModel(dictionaryService.FindAll());
+            ICriteria<Property> criteriaEqualsPropertyType = new CriteriaFieldEqualsTo<Property>("PropertyType", propertyName);
+            ICriteria<Property> criteriaEqualsName = new CriteriaFieldEqualsTo<Property>("Name", name);
+            ICriteria<Property> criteriaIsNull = new CriteriaIsNull<Property>("Description");
+            ICriteria<Property> criteriaPropertyNameOrName = new CriteriaOr<Property>(criteriaEqualsPropertyType, criteriaEqualsName);
+
+            IEnumerable<Property> properties = criteriaPropertyNameOrName.MeetCriteria(dictionaryService.FindAll());
+            properties = criteriaIsNull.MeetCriteria(properties);
+            return this.ConvertAllToPropertyModel(properties);
         }
 
         public IEnumerable<PropertyModel> FindAllByName(string name)
         {
-            ICriteria<Property> criteria = new CriteriaFieldEqualsTo<Property>("Name", name, dictionaryService.FindAll());
+            ICriteria<Property> criteria = new CriteriaFieldEqualsTo<Property>("Name", name);
 
-            return this.ConvertAllToPropertyModel(criteria.meetCriteria());
+            return this.ConvertAllToPropertyModel(criteria.MeetCriteria(dictionaryService.FindAll()));
         }
 
         public PropertyModel CreateProperty(PropertyModel propertyModel)

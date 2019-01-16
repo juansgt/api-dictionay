@@ -15,6 +15,8 @@ namespace ApiDictionary.Model.DataAccess.PropertyDao.PropertyDaoMongo
         public string PropertyType { get; set; }
         [BsonElement("name")]
         public string Name { get; set; }
+        [BsonElement("name")]
+        public string Description { get; set; }
         [BsonElement("examples")]
         public IEnumerable<string> Examples { get; set; }
 

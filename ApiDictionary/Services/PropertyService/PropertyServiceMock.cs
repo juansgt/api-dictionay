@@ -18,12 +18,12 @@ namespace ApiDictionary.Services.PropertyService
             throw new NotImplementedException();
         }
 
-        public IEnumerable<PropertyModel> FindAllByName(string name)
+        public IEnumerable<PropertyModel> FindAllFilter(string propertyName, string name, string deescription)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<PropertyModel> FindAll()
+        public IEnumerable<PropertyModel> FindAllByName(string name)
         {
             throw new NotImplementedException();
         }

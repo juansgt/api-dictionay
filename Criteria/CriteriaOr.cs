@@ -16,10 +16,10 @@ namespace Criteria
             this.otherCriteria = otherCriteria;
         }
 
-        public IEnumerable<E> meetCriteria()
+        public IEnumerable<E> MeetCriteria(IEnumerable<E> items)
         {
-            List<E> firstCriteriaElements = criteria.meetCriteria().ToList();
-            IEnumerable<E> otherCriteriaElements = otherCriteria.meetCriteria();
+            List<E> firstCriteriaElements = criteria.MeetCriteria(items).ToList();
+            IEnumerable<E> otherCriteriaElements = otherCriteria.MeetCriteria(items);
 
             foreach (E element in otherCriteriaElements)
             {

@@ -10,6 +10,7 @@ namespace ApiDictionary.Models
         public string Id { get; set; }
         public string PropertyType { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         public IEnumerable<string> Examples { get; set; }
     }
 }
