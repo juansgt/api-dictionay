@@ -18,7 +18,7 @@ namespace ApiDictionary.Services.PropertyService
             throw new NotImplementedException();
         }
 
-        public IEnumerable<PropertyModel> FindAllFilter(string propertyName, string name, string deescription)
+        public IEnumerable<PropertyModel> FindAllFilter(string propertyName, string name, string description)
         {
             throw new NotImplementedException();
         }

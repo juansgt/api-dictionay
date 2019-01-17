@@ -19,12 +19,19 @@ namespace ApiDictionary.Controllers
         {
             this.propertyService = propertyService;
         }
-        // GET: api/Properties
+
         [HttpGet]
-        public IEnumerable<PropertyModel> GetAllPropertiesByName(string name)
+        public IEnumerable<PropertyModel> FindAllPropertiesFilter(string propertyName, string name, string description)
         {
-            return propertyService.FindAllByName(name);
+            return propertyService.FindAllFilter(propertyName, name, description);
         }
+
+        //// GET: api/Properties
+        //[HttpGet]
+        //public IEnumerable<PropertyModel> GetAllPropertiesByName(string name)
+        //{
+        //    return propertyService.FindAllByName(name);
+        //}
 
         // GET: api/Properties/5
         [HttpGet("{id}")]

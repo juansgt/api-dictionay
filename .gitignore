@@ -17,3 +17,7 @@
 /Criteria/bin/Debug/netcoreapp2.1
 /Criteria/obj/Debug/netcoreapp2.1
 /Criteria/obj
+/.vs
+/ApiDictionary/obj/Release/netcoreapp2.1
+/ApiDictionary.Model/obj/Release/netcoreapp2.1
+/DataAccess/obj/Release/netcoreapp2.1
