@@ -27,6 +27,7 @@ namespace ApiDictionary.Model.DataAccess.PropertyDao.PropertyDaoMongo
             property.Id = this.Id.ToString();
             property.Name = this.Name;
             property.PropertyType = this.PropertyType;
+            property.Description = this.Description;
             property.Examples = this.Examples;
 
             return property;
@@ -39,6 +40,7 @@ namespace ApiDictionary.Model.DataAccess.PropertyDao.PropertyDaoMongo
             propertyMongo.Id = property.Id == null ? ObjectId.Empty : ObjectId.Parse(property.Id);
             propertyMongo.Name = property.Name;
             propertyMongo.PropertyType = property.PropertyType;
+            propertyMongo.Description = property.Description;
             propertyMongo.Examples = property.Examples;
 
             return propertyMongo;

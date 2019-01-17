@@ -8,7 +8,6 @@ namespace Criteria
     public class CriteriaIsNull<E> : ICriteria<E>
     {
         public string FieldToCompare { get; set; }
-        private readonly IEnumerable<E> items;
 
         public CriteriaIsNull(string fieldToCompare)
         {

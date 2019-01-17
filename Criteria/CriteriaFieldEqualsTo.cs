@@ -9,7 +9,6 @@ namespace Criteria
     {
         public string ValueToCompare { get; set; }
         public string FieldToCompare { get; set; }
-        private readonly IEnumerable<E> items;
 
         public CriteriaFieldEqualsTo(string fieldToCompare, string valueToCompare)
         {
