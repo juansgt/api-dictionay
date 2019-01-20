@@ -5,12 +5,12 @@ using System.Text;
 
 namespace Criteria
 {
-    public class CriteriaOr<E> : ICriteria<E>
+    public class CriteriaOr<F, E> : ICriteria<F, E>
     {
-        private ICriteria<E> criteria;
-        private ICriteria<E> otherCriteria;
+        private ICriteria<F, E> criteria;
+        private ICriteria<F, E> otherCriteria;
 
-        public CriteriaOr(ICriteria<E> criteria, ICriteria<E> otherCriteria)
+        public CriteriaOr(ICriteria<F, E> criteria, ICriteria<F, E> otherCriteria)
         {
             this.criteria = criteria;
             this.otherCriteria = otherCriteria;
