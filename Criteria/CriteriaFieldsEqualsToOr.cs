@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Criteria
 {
-    public class CriteriaFieldsEqualsToOr<F, E> : ICriteria<F, E>
+    public class CriteriaFieldsEqualsToOr<F, E> : ICriteria<E>
     {
         public (string fieldToCompare, string valueToCompare)[] DataToCompare { get; set; }
 

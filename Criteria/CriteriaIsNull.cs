@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Criteria
 {
-    public class CriteriaIsNull<F, E> : ICriteria<F, E>
+    public class CriteriaIsNull<F, E> : ICriteria<E>
     {
         public string FieldToCompare { get; set; }
 

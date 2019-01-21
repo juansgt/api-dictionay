@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Criteria
 {
-    public interface ICriteria<F,E>
+    public interface ICriteria<E>
     {
         IEnumerable<E> MeetCriteria(IEnumerable<E> items);
     }
