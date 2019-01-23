@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Criteria
 {
-    public class CriteriaAnd<F, E> : ICriteria<E>
+    public class CriteriaAnd<E> : ICriteria<E>
     {
         private ICriteria<E> criteria;
         private ICriteria<E> otherCriteria;
