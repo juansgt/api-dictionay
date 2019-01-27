@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApiDictionary.Models;
+using static ApiDictionary.Services.PropertyService.PropertyFilter;
 
 namespace ApiDictionary.Services.PropertyService
 {
@@ -18,7 +19,7 @@ namespace ApiDictionary.Services.PropertyService
             throw new NotImplementedException();
         }
 
-        public IEnumerable<PropertyModel> FindAllFilter(PropertyFilter propertyFilter)
+        public IEnumerable<PropertyModel> FindAllFilter(PropertyFilter propertyFilter, Operand operand)
         {
             throw new NotImplementedException();
         }

@@ -1,67 +1,68 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace Criteria
 {
-    public class CriteriaFieldsEqualsToAnd<F, E> : ICriteria<E>
+    public class CriteriaFieldsEqualsToAnd<F, E> : ICriteria<F, E>
     {
-        public F Filter { get; private set; }
+        private object valueInDataSource;
+        private object valueToCompare;
 
-        public CriteriaFieldsEqualsToAnd(F filter)
-        {
-            Filter = filter;
-        }
-
-        public IEnumerable<E> MeetCriteria(IEnumerable<E> items)
+        public IEnumerable<E> MeetCriteria(F filter, IEnumerable<E> items)
         {
             List<E> result = new List<E>();
-            string valueInDataSource;
-            string valueToCompare;
+            int count;
+            PropertyInfo[] filterProperties = filter.GetType().GetProperties();
 
             foreach (E item in items)
             {
-                for (int i = 0; i < DataToCompare.Length; i++)
+                count = 0;
+                foreach(PropertyInfo property in filterProperties)
                 {
-                    valueInDataSource = item.GetType().GetProperty(DataToCompare[i].fieldToCompare).GetValue(item).ToString();
-                    valueToCompare = DataToCompare[i].valueToCompare;
+                    count++;
+                    SetDataSourceValueAndValueToCompare(item, property, filter);
 
-                    if (valueInDataSource != valueToCompare) break;
-
-                    if (i == DataToCompare.Length - 1) result.Add(item);
+                    if (valueInDataSource.Equals(valueToCompare))
+                    {
+                        if (count == filterProperties.Length)
+                            result.Add(item);
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
-
             return result;
         }
 
-        //public (string fieldToCompare, string valueToCompare)[] DataToCompare { get; set; }
+        protected void SetDataSourceValueAndValueToCompare(E item, PropertyInfo property, F filter)
+        {
+            object objectDataSource;
+            object objectToCompare;
+            CriteriaFilterAttribute criteriaFilterAttribute;
 
-        //public CriteriaFieldsEqualsToAnd(params (string fieldToCompare, string valueToCompare)[] dataToCompare)
-        //{
-        //    DataToCompare = dataToCompare;
-        //}
+            criteriaFilterAttribute = (CriteriaFilterAttribute)property.GetCustomAttribute(typeof(CriteriaFilterAttribute), false);
+            objectDataSource = item.GetType().GetProperty(criteriaFilterAttribute.FilterPropertyName).GetValue(item);
+            objectToCompare = property.GetValue(filter);
+            valueInDataSource = objectDataSource;
+            valueToCompare = objectToCompare;
+            //Type t1 = valueToCompare.GetType();
+            //Type t2 = valueInDataSource.GetType();
+            //t2.ToString();
 
-        //public IEnumerable<E> MeetCriteria(IEnumerable<E> items)
-        //{
-        //    List<E> result = new List<E>();
-        //    string valueInDataSource;
-        //    string valueToCompare;
+            //if (objectDataSource == null)
+            //    valueInDataSource = string.Empty;
+            //else
+            //    valueInDataSource = objectDataSource.ToString();
 
-        //    foreach (E item in items)
-        //    {
-        //        for (int i = 0; i < DataToCompare.Length; i++) 
-        //        {
-        //            valueInDataSource = item.GetType().GetProperty(DataToCompare[i].fieldToCompare).GetValue(item).ToString();
-        //            valueToCompare = DataToCompare[i].valueToCompare;
 
-        //            if (valueInDataSource != valueToCompare) break;
-
-        //            if (i == DataToCompare.Length - 1) result.Add(item);
-        //        }
-        //    }
-
-        //    return result;
-        //}
+            //if (objectToCompare == null)
+            //    valueToCompare = string.Empty;
+            //else
+            //    valueToCompare = objectToCompare.ToString();
+        }
     }
 }

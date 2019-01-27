@@ -21,9 +21,11 @@ namespace ApiDictionary.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<PropertyModel> FindAllPropertiesFilter(string propertyType, string name, string description)
+        public IEnumerable<PropertyModel> FindAllPropertiesFilter(string propertyType, string name, string description, string operand)
         {
-            return propertyService.FindAllFilter(propertyType, name, description);
+            PropertyFilter propertyFilter = new PropertyFilter(propertyType, name, description);
+
+            return propertyService.FindAllFilter(propertyFilter, PropertyFilter.Operand.AND);
         }
 
         //// GET: api/Properties

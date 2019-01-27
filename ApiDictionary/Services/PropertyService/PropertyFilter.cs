@@ -16,5 +16,14 @@ namespace ApiDictionary.Services.PropertyService
 
         [CriteriaFilter("Description")]
         public string Description { get; set; }
+
+        public enum Operand { AND, OR };
+
+        public PropertyFilter(string propertyType, string name, string description)
+        {
+            PropertyType = propertyType;
+            Name = name;
+            Description = description;
+        }
     }
 }

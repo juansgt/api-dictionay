@@ -7,6 +7,7 @@ using ApiDictionary.Model.Services.DictionaryService;
 using ApiDictionary.Models;
 using Criteria;
 using Microsoft.Extensions.DependencyInjection;
+using static ApiDictionary.Services.PropertyService.PropertyFilter;
 
 namespace ApiDictionary.Services.PropertyService
 {
@@ -24,19 +25,20 @@ namespace ApiDictionary.Services.PropertyService
             return this.ConvertToPropertyModel(dictionaryService.Find(id));
         }
 
-        public IEnumerable<PropertyModel> FindAllFilter(PropertyFilter propertyFilter)
+        public IEnumerable<PropertyModel> FindAllFilter(PropertyFilter propertyFilter, Operand operand)
         {
-            ICriteria<Property> criteriaFieldsEqualsToAnd = new CriteriaFieldsEqualsToAnd<Property>(("Name", name), ("PropertyType", propertyType));
-            IEnumerable<Property> properties = criteriaFieldsEqualsToAnd.MeetCriteria(dictionaryService.FindAll());
+            ICriteria<PropertyFilter, Property> criteriaFieldsEqualsToAnd = new CriteriaFieldsEqualsToAnd<PropertyFilter, Property>();
+            IEnumerable<Property> properties = criteriaFieldsEqualsToAnd.MeetCriteria(propertyFilter, dictionaryService.FindAll());
 
             return this.ConvertAllToPropertyModel(properties);
         }
 
         public IEnumerable<PropertyModel> FindAllByName(string name)
         {
-            ICriteria<Property> criteria = new CriteriaFieldEqualsTo<Property>("Name", name);
+            throw new NotImplementedException();
+            //ICriteria<Property> criteria = new CriteriaFieldEqualsTo<Property>("Name", name);
 
-            return this.ConvertAllToPropertyModel(criteria.MeetCriteria(dictionaryService.FindAll()));
+            //return this.ConvertAllToPropertyModel(criteria.MeetCriteria(dictionaryService.FindAll()));
         }
 
         public PropertyModel CreateProperty(PropertyModel propertyModel)
