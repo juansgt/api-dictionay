@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -15,7 +16,7 @@ namespace Criteria
             List<E> result = new List<E>();
             int count;
             PropertyInfo[] filterProperties = filter.GetType().GetProperties();
-
+            
             foreach (E item in items)
             {
                 count = 0;
@@ -24,7 +25,7 @@ namespace Criteria
                     count++;
                     SetDataSourceValueAndValueToCompare(item, property, filter);
 
-                    if (valueInDataSource.Equals(valueToCompare))
+                    if (valueInDataSource == valueToCompare)
                     {
                         if (count == filterProperties.Length)
                             result.Add(item);
@@ -47,6 +48,8 @@ namespace Criteria
             criteriaFilterAttribute = (CriteriaFilterAttribute)property.GetCustomAttribute(typeof(CriteriaFilterAttribute), false);
             objectDataSource = item.GetType().GetProperty(criteriaFilterAttribute.FilterPropertyName).GetValue(item);
             objectToCompare = property.GetValue(filter);
+            Type t1 = objectDataSource.GetType();
+            Type t2 = objectToCompare.GetType();
             valueInDataSource = objectDataSource;
             valueToCompare = objectToCompare;
             //Type t1 = valueToCompare.GetType();
