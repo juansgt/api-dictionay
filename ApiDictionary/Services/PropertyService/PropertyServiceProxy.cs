@@ -56,6 +56,7 @@ namespace ApiDictionary.Services.PropertyService
             propertyModel.Examples = property.Examples;
             propertyModel.Name = property.Name;
             propertyModel.PropertyType = property.PropertyType;
+            propertyModel.Description = property.Description;
 
             return propertyModel;
         }
@@ -67,6 +68,7 @@ namespace ApiDictionary.Services.PropertyService
             property.Examples = propertyModel.Examples;
             property.Name = propertyModel.Name;
             property.PropertyType = propertyModel.PropertyType;
+            property.Description = propertyModel.Description;
 
             return property;
         }
