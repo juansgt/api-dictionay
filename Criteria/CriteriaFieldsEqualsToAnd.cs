@@ -12,12 +12,14 @@ namespace Criteria
         private object valueInDataSource;
         private object valueToCompare;
         private CriteriaFilterAttribute criteriaFilterAttribute;
+        private bool ignoreNullFilterValues { get; set; }
 
         public CriteriaFieldsEqualsToAnd()
         {
             valueInDataSource = null;
             valueToCompare = null;
             criteriaFilterAttribute = null;
+            ignoreNullFilterValues = false;
         }
 
         public IEnumerable<E> MeetCriteria(F filter, IEnumerable<E> items)
@@ -27,10 +29,21 @@ namespace Criteria
             PropertyInfo[] filterProperties = filter.GetType().GetProperties();
             List<PropertyInfo> filterPropertiesWithCriteriaFilterAttribute = new List<PropertyInfo>();
 
-            foreach (PropertyInfo filterProperty in filterProperties)
+            if (ignoreNullFilterValues)
             {
-                if ((CriteriaFilterAttribute)filterProperty.GetCustomAttribute(typeof(CriteriaFilterAttribute), false) != null)
-                    filterPropertiesWithCriteriaFilterAttribute.Add(filterProperty);
+                foreach (PropertyInfo filterProperty in filterProperties)
+                {
+                    if ((CriteriaFilterAttribute)filterProperty.GetCustomAttribute(typeof(CriteriaFilterAttribute), false) != null && filterProperty.GetValue(filter) != null)
+                        filterPropertiesWithCriteriaFilterAttribute.Add(filterProperty);
+                }
+            }
+            else
+            {
+                foreach (PropertyInfo filterProperty in filterProperties)
+                {
+                    if ((CriteriaFilterAttribute)filterProperty.GetCustomAttribute(typeof(CriteriaFilterAttribute), false) != null)
+                        filterPropertiesWithCriteriaFilterAttribute.Add(filterProperty);
+                }
             }
 
             foreach (E item in items)
@@ -63,6 +76,11 @@ namespace Criteria
             criteriaFilterAttribute = (CriteriaFilterAttribute)filterProperty.GetCustomAttribute(typeof(CriteriaFilterAttribute), false);
             valueInDataSource = item.GetType().GetProperty(criteriaFilterAttribute.FilterPropertyName).GetValue(item);
             valueToCompare = filterProperty.GetValue(filter);
+        }
+
+        void ICriteria<F, E>.IgnoreNullFilterValues()
+        {
+            ignoreNullFilterValues = true;
         }
 
         //protected void SetDataSourceValueAndValueToCompare(E item, PropertyInfo property, F filter)

@@ -36,5 +36,10 @@ namespace Criteria
 
             return result;
         }
+
+        public void IgnoreNullFilterValues()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

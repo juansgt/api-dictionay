@@ -28,6 +28,7 @@ namespace ApiDictionary.Services.PropertyService
         public IEnumerable<PropertyModel> FindAllFilter(PropertyFilter propertyFilter, Operand operand)
         {
             ICriteria<PropertyFilter, Property> criteriaFieldsEqualsToAnd = new CriteriaFieldsEqualsToAnd<PropertyFilter, Property>();
+            criteriaFieldsEqualsToAnd.IgnoreNullFilterValues();
             IEnumerable<Property> properties = criteriaFieldsEqualsToAnd.MeetCriteria(propertyFilter, dictionaryService.FindAll());
 
             return this.ConvertAllToPropertyModel(properties);
